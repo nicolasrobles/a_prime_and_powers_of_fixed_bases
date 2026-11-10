@@ -112,6 +112,30 @@
       "tables": "The three numerical tables are those of v20.",
       "constants": "Unchanged from v20.",
       "added_checks": {}
+    },
+    {
+      "version": "v23",
+      "filename": "prime_and_fixed_base_powers_v23.tex",
+      "sha256": "81ee9d05d72cbd108473946450b44816c02f7db637adcac59bfbf8773ee1a07a",
+      "bytes": 175370,
+      "lines": 3797,
+      "table_lines": {
+        "tab:G2": [
+          1277,
+          1300
+        ],
+        "tab:G3": [
+          1302,
+          1321
+        ],
+        "tab:k": [
+          1447,
+          1473
+        ]
+      },
+      "tables": "The three numerical tables are those of v20.",
+      "constants": "Unchanged from v20.",
+      "added_checks": {}
     }
   ]
 }

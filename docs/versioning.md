@@ -66,6 +66,18 @@ The tables and constants are those of v19. Two stages were added for the section
 
 The tables and constants are those of v20, and no stage was added. The revision adds the concluding section of the manuscript, which names no new computation, and one clarification in the proof of the theorem on balanced triples.
 
+## The v23 revision
+
+- Source filename: `prime_and_fixed_base_powers_v23.tex`.
+- Source size: 175,370 bytes, 3,797 lines.
+- Source SHA-256:
+
+```text
+81ee9d05d72cbd108473946450b44816c02f7db637adcac59bfbf8773ee1a07a
+```
+
+The tables and constants are those of v20, and no stage was added. The revision completes the introduction and adds the abstract; the three tables are at later lines of the source. The intermediate v22 is not recorded.
+
 ## Reproducing the stored results
 
 Run the complete checker from the repository root:

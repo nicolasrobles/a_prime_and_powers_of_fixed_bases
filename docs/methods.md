@@ -1,6 +1,6 @@
 # Methods used by the verifiers
 
-The programs check the finite claims recorded for versions 13, 19, 20 and 21 of *A prime and powers of fixed bases*. The allocation inputs were extracted from v13 and are unchanged in the later versions. This document explains what is computed and why the checks suffice for those claims. The covering and asymptotic arguments are given in the manuscript.
+The programs check the finite claims recorded for versions 13, 19, 20, 21 and 23 of *A prime and powers of fixed bases*. The allocation inputs were extracted from v13 and are unchanged in the later versions. This document explains what is computed and why the checks suffice for those claims. The covering and asymptotic arguments are given in the manuscript.
 
 ## Inputs and exact arithmetic
 

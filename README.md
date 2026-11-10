@@ -146,10 +146,10 @@ The manuscript sources are identified by their SHA-256 digests. The tables were 
 af63bc8cb54d4ba3b2e93d6b068d223fce2c822a521640568a353e6a312b7df7
 ```
 
-They were compared again with the later revisions recorded in `data/source_manifest.json` (v19, v20 and v21), in which they are unchanged. If one of these sources is available locally, its tables can be compared with the repository inputs:
+They were compared again with the later revisions recorded in `data/source_manifest.json` (v19, v20, v21 and v23), in which they are unchanged. If one of these sources is available locally, its tables can be compared with the repository inputs:
 
 ```sh
-python3 scripts/check_source_tables.py /path/to/prime_and_fixed_base_powers_v21.tex
+python3 scripts/check_source_tables.py /path/to/prime_and_fixed_base_powers_v23.tex
 ```
 
 For a source that is not recorded in `data/source_manifest.json`, add `--rows-only` to compare the table entries only.
