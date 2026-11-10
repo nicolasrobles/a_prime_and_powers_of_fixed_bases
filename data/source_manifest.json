@@ -27,7 +27,38 @@
     "finite_allocation": "Both complete reflected systems and prescribed prime orders.",
     "auxiliary_primes": "All finite rows, the universal larger-index lower bounds, and exact products.",
     "introductory_arithmetic": "Candidate nonrepresentability and finite residue classifications.",
-    "base3_minimality_verified": false
+    "base3_minimality_verified": true,
+    "balanced_sieve": "The set of 626 primes and the upper bound for the density of the surviving residue pairs (v19, Lemma 5.1).",
+    "base3_minimality": "Exhaustive search over all odd integers coprime to 3 between 10 and 118514161 (v19, Theorem 1.5)."
   },
-  "certificate_note": "The original ap_certificate.json metadata records 2.2874. The verifier checks its entries against the stronger v13 target 2.287407."
+  "certificate_note": "The original ap_certificate.json metadata records 2.2874. The verifier checks its entries against the stronger v13 target 2.287407.",
+  "revisions": [
+    {
+      "version": "v19",
+      "filename": "prime_and_fixed_base_powers_v19.tex",
+      "sha256": "71c0bf24fb9e36e42702a8e6b4916123746b78e08bda795b635fda12207adefe",
+      "bytes": 142639,
+      "lines": 3178,
+      "table_lines": {
+        "tab:G2": [
+          1051,
+          1074
+        ],
+        "tab:G3": [
+          1076,
+          1095
+        ],
+        "tab:k": [
+          1221,
+          1247
+        ]
+      },
+      "tables": "The three numerical tables agree with data/tables_v13.json in every entry. The empty cell of the third table is typeset with a single hyphen.",
+      "constants": "The targets Z_2 = 2.081483 and Z_3 = 2.287407 and the bounds for P_i, Z_i P_i and C_i are those of v13, so the two allocation witnesses establish the statements of v19 without change.",
+      "added_checks": {
+        "balanced_sieve.json": "Lemma 5.1: the 626 primes and the density bound 0.253624.",
+        "base3_minimality.json": "Theorem 1.5: every smaller admissible integer is a prime plus two positive powers of 3."
+      }
+    }
+  ]
 }

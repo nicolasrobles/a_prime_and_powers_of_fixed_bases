@@ -1,0 +1,15 @@
+{
+  "manuscript_statement": "Theorem 1.5",
+  "candidate": 118514161,
+  "candidate_differences_checked": 153,
+  "candidate_exponents": "nonnegative",
+  "candidate_excludes": "prime powers p^k with k >= 1",
+  "smaller_integers": "odd, coprime to 3, 10 < n < candidate",
+  "smaller_integers_count": 39504717,
+  "smaller_integers_summand": "prime",
+  "smaller_integers_exponents": "positive",
+  "translates": 136,
+  "smaller_integers_not_represented": 0,
+  "candidate_represented": false,
+  "minimality_checked": true
+}

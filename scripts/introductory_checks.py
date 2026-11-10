@@ -1,7 +1,8 @@
 #!/usr/bin/env python3
-"""Exact candidate factorizations and finite residue checks for v13.
+"""Exact candidate factorizations and finite residue checks.
 
-The base-three candidate is checked; its minimality is not tested.
+The base-three candidate is checked here. Its minimality is checked by
+scripts/base3_minimality.py, which writes base3_minimality.json.
 """
 from math import gcd, isqrt, prod
 from pathlib import Path
@@ -125,7 +126,7 @@ def run_checks(output_dir):
         'base3_candidate': N,
         'base3_candidate_pairs_checked': len(factorizations),
         'base3_factorizations': factorizations,
-        'base3_minimality_checked': False,
+        'base3_minimality_record': 'base3_minimality.json',
         '599_601_periods_mod600': periods_600,
         'empty_classes_mod600': empty,
         'sparse_classes_mod600': sparse,
@@ -141,5 +142,5 @@ def run_checks(output_dir):
     print('MOD600', len(empty), 'empty;', len(sparse),
           'sparse with J_5=2;', coprime_count, 'coprime')
     print('MOD60 class57: 599/601 empty; 17/19 witness 49 is coprime')
-    print('MINIMALITY not checked')
+    print('MINIMALITY: see the base3 stage')
     return result

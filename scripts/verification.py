@@ -1,4 +1,9 @@
-"""Exact verification of the finite computations in manuscript v13.
+"""Exact verification of the finite computations in the manuscript.
+
+The allocation and auxiliary computations of Section 4 are tied to the
+tables extracted from v13, which are unchanged in the later revisions
+recorded in data/source_manifest.json. The stages 'balanced' and 'base3'
+were added for v19 and are implemented in separate modules.
 
 Only Python's standard library is required. All acceptance tests use integers
 or Fraction. Floating-point fields are supplementary displays. The input
@@ -421,9 +426,10 @@ def tail_checks(cases=(2, 3)):
 def main(default_stage='all', cases=(2, 3), allow_stage=True):
     global OUT
     parser = argparse.ArgumentParser(
-        description='Exact finite verification for A prime and powers of fixed bases, v13.')
+        description='Exact finite verification for A prime and powers of fixed bases.')
     if allow_stage:
-        parser.add_argument('stage', choices=['finite', 'tail', 'intro', 'all'],
+        parser.add_argument('stage', choices=['finite', 'tail', 'intro',
+                                              'balanced', 'base3', 'all'],
                             default=default_stage, nargs='?')
     parser.add_argument('--output-dir', type=Path, default=OUT,
                         help='output directory (default: results/ in this repository)')
@@ -438,6 +444,12 @@ def main(default_stage='all', cases=(2, 3), allow_stage=True):
     if stage in ('intro', 'all'):
         from scripts.introductory_checks import run_checks
         run_checks(OUT)
+    if stage in ('balanced', 'all'):
+        from scripts.balanced_sieve import run_checks as balanced_checks
+        balanced_checks(OUT)
+    if stage in ('base3', 'all'):
+        from scripts.base3_minimality import run_checks as base3_checks
+        base3_checks(OUT)
     print('SUCCESS', flush=True)
     return 0
 

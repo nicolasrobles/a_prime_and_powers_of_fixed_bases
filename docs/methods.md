@@ -240,7 +240,7 @@ The decimal intervals in the result files are certified by rational comparison. 
 
 ## Introductory arithmetic
 
-For $N=118\,514\,161$, one has $3^{16}<N<3^{17}$. It is enough to consider $0\le a\le b\le16$, giving 153 unordered pairs. The program completely factors every $N-3^a-3^b$, checks that the product of the factors reconstructs the difference, and proves each recorded prime factor prime by trial division. Every difference has at least two distinct prime factors, so none is a prime power. The program checks this candidate, not the minimality assertion.
+For $N=118\,514\,161$, one has $3^{16}<N<3^{17}$. It is enough to consider $0\le a\le b\le16$, giving 153 unordered pairs. The program completely factors every $N-3^a-3^b$, checks that the product of the factors reconstructs the difference, and proves each recorded prime factor prime by trial division. Every difference has at least two distinct prime factors, so none is a prime power. This stage checks the candidate. Minimality is treated in the section on base three below.
 
 Modulo 600, the orders of 599 and 601 are 2 and 1. For odd $b$, the possible prime residues are $b$ and $b-2$. Both fail to be units exactly when $b\equiv5$ or $12\pmod{15}$. There are 40 such odd classes modulo 600. Only $b=5$ allows a prime divisor of 600 as one of the residues, giving the two possibilities 5 and 3. Thus there are 39 empty classes, one sparse class with $J_5=2$, and 260 classes with a coprime residue.
 
@@ -251,6 +251,37 @@ $$
 $$
 
 for the pair $(17,19)$. The density consequences require the analytic statements of the manuscript.
+
+## The balanced-triple sieve
+
+For a prime $q\ge5$ write $\operatorname{ord}_q(2)=3^{\alpha_q}e_q$ with $3\nmid e_q$. The set $\mathcal K$ consists of the primes $5\le q\le50000$ such that
+
+- $e_q/(e_q,80)$ is $1$ or a prime $v$ with $7\le v\le317$, and
+- $q$ divides $1+2^{h_1}+2^{h_2}$ for some $h_1,h_2\ge0$ divisible by $3^{\alpha_q}$.
+
+`scripts/balanced_sieve.py` computes each order from the factorization of $q-1$. For each $q$ satisfying the first condition it forms $\zeta=2^h$, where $h$ is divisible by $3^{\alpha_q}$ and congruent to $1$ modulo $e_q$, checks that $\zeta$ has order $e_q$ by listing its $e_q$ powers, and finds all pairs $(i,k)$ modulo $e_q$ with $1+\zeta^i+\zeta^k\equiv0\pmod q$. The second condition holds exactly when there is such a pair. The program finds 870 primes with the first condition and 626 with both, and the largest $\alpha_q$ among the latter is $4$. Hence, for exponents divisible by $81$, divisibility by a prime of $\mathcal K$ depends only on the classes of the exponents modulo $e_q$.
+
+Let $N_0=80\prod_{7\le v\le317}v$ over primes $v$, and let $\varrho$ be the density of the pairs of classes modulo $N_0$ for which $1+2^{h_1}+2^{h_2}$ is divisible neither by $3$ nor by a prime of $\mathcal K$. Group the primes of $\mathcal K$ by $v=e_q/(e_q,80)$. For a pair $(a_0,b_0)$ of classes modulo $80$, let $N_v(a_0,b_0)$ be the number of pairs of classes modulo $v$ not excluded by a prime of the group $v$. Since $80$ and the primes $v$ are pairwise coprime,
+
+$$
+\varrho=\frac1{80^2}\sum_{(a_0,b_0)}\prod_v\frac{N_v(a_0,b_0)}{v^2},
+$$
+
+where the sum is over the pairs that are not both even (the prime $3$) and the product includes $v=1$. The program evaluates the right side twice. The first evaluation uses integers scaled by $10^{12}$ and rounds upwards after each factor; it gives
+
+$$
+\varrho\le\frac{1623190827888387}{6400000000000000}<0.253624.
+$$
+
+The second evaluation is exact, with the common denominator $80^2\prod_v v^2$. It gives $\varrho=0.25362356684502987\ldots$, and the program checks that this does not exceed the rounded bound. It also checks $2\cdot0.253624<0.712214^2$ and $0.712214<5/7$ with rational numbers.
+
+## Minimality in base three
+
+`scripts/base3_minimality.py` repeats the 153 factorizations for $N=118\,514\,161$ and then proves that every odd integer $n$ coprime to $3$ with $10<n<N$ is of the form $p+3^a+3^b$ with $p$ prime and $1\le a\le b\le16$. Exponents above $16$ cannot occur since $3^{17}>N$, and $p$ is odd because $n$ is odd and $3^a+3^b$ is even.
+
+The odd primes up to $N$ are found by the sieve of Eratosthenes on the odd integers and stored as the bits of one integer, bit $j$ standing for $2j+1$. Adding $3^a+3^b$ to every prime is a shift by $(3^a+3^b)/2$ bits. The union of the $136$ shifted copies is compared with the set of the odd integers coprime to $3$ in $(10,N]$. The only one of these integers not in the union is $N$, and the number of those below $N$ is $39\,504\,717$.
+
+Since a representation with a prime and positive exponents is also one with a prime power and nonnegative exponents, $N$ is the least exception in each of the four conventions.
 
 ## Mathematical references
 

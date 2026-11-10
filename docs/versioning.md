@@ -20,6 +20,25 @@ The binary and ternary witness files preserve their original bytes. In particula
 
 The source manifest records the input identities. The table file records the extraction labels and raw line ranges. The exact result files describe what was checked and contain the numerical witnesses needed to inspect the calculations.
 
+## The v19 revision
+
+- Source filename: `prime_and_fixed_base_powers_v19.tex`.
+- Source size: 142,639 bytes, 3,178 lines.
+- Source SHA-256:
+
+```text
+71c0bf24fb9e36e42702a8e6b4916123746b78e08bda795b635fda12207adefe
+```
+
+The three numerical tables of v19 agree with `data/tables_v13.json` in every entry; only the empty cell of the third table is typeset differently. The targets $Z_2$, $Z_3$ and the bounds for $P_i$, $Z_iP_i$ and $C_i$ are unchanged. The two allocation witnesses and the results of the stages `finite` and `tail` therefore apply to v19 as they stand, and they keep their v13 identification.
+
+Two stages were added for statements that first appear after v13:
+
+- `balanced` (Lemma 5.1), implemented in `scripts/balanced_sieve.py`, with the result file `balanced_sieve.json`;
+- `base3` (Theorem 1.5), implemented in `scripts/base3_minimality.py`, with the result file `base3_minimality.json`.
+
+The revision is recorded under `revisions` in `data/source_manifest.json`, with the line ranges of the three tables in the v19 source. `scripts/check_source_tables.py` accepts either recorded source.
+
 ## Reproducing the stored results
 
 Run the complete checker from the repository root:
@@ -67,6 +86,6 @@ Keep three kinds of statements explicit when extending the repository:
 
 - **Finite verifications:** an exhaustive enumeration or exact comparison that the code has actually performed.
 - **Mathematical inputs:** theorems used to interpret those finite checks, such as the primitive-divisor supply.
-- **Further work:** announced computations that have not yet been run, including a new exhaustive proof of the base-three minimality assertion.
+- **Further work:** announced computations that have not yet been run, such as the finite checks for two distinct bases.
 
-For example, the current introductory output records `base3_minimality_checked: false`. Preserve that field until a separate computation covering every required smaller integer has been implemented, completed, and documented.
+For example, the introductory stage factors the differences for the base-three candidate and does not test minimality. Its output points to `base3_minimality.json`, the record of the separate exhaustive computation.
