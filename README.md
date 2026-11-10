@@ -16,7 +16,7 @@ cd a_prime_and_powers_of_fixed_bases
 python3 verify_all.py
 ```
 
-The command verifies both finite allocations, all auxiliary order calculations, the resulting products and constants, the introductory arithmetic, the balanced-triple density bound, the least base-three exception, the congruences for common sums, and the counts for two distinct bases. It takes under a minute and uses about 100 MB of memory. It writes the complete results to `results/`. A failed check stops with an error and a nonzero exit status. Run Python normally, without `-O`, because the programs use assertions.
+The command verifies both finite allocations, all auxiliary order calculations, the resulting products and constants, the introductory arithmetic, the balanced-triple density bound, the least base-three exception, the congruences for common sums, and the counts for two distinct bases. It takes under a minute and uses about 200 MB of memory; both figures depend on the Python version and the machine. It writes the complete results to `results/`. A failed check stops with an error and a nonzero exit status. Run Python normally, without `-O`, because the programs use assertions.
 
 To reproduce the results in a separate directory, run:
 
@@ -146,10 +146,10 @@ The manuscript sources are identified by their SHA-256 digests. The tables were 
 af63bc8cb54d4ba3b2e93d6b068d223fce2c822a521640568a353e6a312b7df7
 ```
 
-They were compared again with the later revisions recorded in `data/source_manifest.json` (v19 and v20), in which they are unchanged. If one of these sources is available locally, its tables can be compared with the repository inputs:
+They were compared again with the later revisions recorded in `data/source_manifest.json` (v19, v20 and v21), in which they are unchanged. If one of these sources is available locally, its tables can be compared with the repository inputs:
 
 ```sh
-python3 scripts/check_source_tables.py /path/to/prime_and_fixed_base_powers_v20.tex
+python3 scripts/check_source_tables.py /path/to/prime_and_fixed_base_powers_v21.tex
 ```
 
 For a source that is not recorded in `data/source_manifest.json`, add `--rows-only` to compare the table entries only.

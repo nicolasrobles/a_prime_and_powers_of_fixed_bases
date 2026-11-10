@@ -88,6 +88,30 @@
         "common_sums.json": "Proposition 7.1: the three congruences for the common sums of two pairs of bases.",
         "odd_sum_counts.json": "Table 5: counts of odd integers p + q1^j + q2^k up to 10^7 and 10^8 (numerical data)."
       }
+    },
+    {
+      "version": "v21",
+      "filename": "prime_and_fixed_base_powers_v21.tex",
+      "sha256": "898d6e77868d14d992a52bad2340472f8953d69c7b0311068cc0e9047d871c16",
+      "bytes": 162036,
+      "lines": 3561,
+      "table_lines": {
+        "tab:G2": [
+          1051,
+          1074
+        ],
+        "tab:G3": [
+          1076,
+          1095
+        ],
+        "tab:k": [
+          1221,
+          1247
+        ]
+      },
+      "tables": "The three numerical tables are those of v20.",
+      "constants": "Unchanged from v20.",
+      "added_checks": {}
     }
   ]
 }

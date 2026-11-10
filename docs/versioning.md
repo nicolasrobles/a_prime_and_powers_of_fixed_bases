@@ -54,6 +54,18 @@ The tables and constants are those of v19. Two stages were added for the section
 - `common` (Proposition 7.1), implemented in `scripts/common_sums.py`, with the result file `common_sums.json`;
 - `counts` (Table 5), implemented in `scripts/odd_sum_counts.py`, with the result file `odd_sum_counts.json`. These counts are numerical data.
 
+## The v21 revision
+
+- Source filename: `prime_and_fixed_base_powers_v21.tex`.
+- Source size: 162,036 bytes, 3,561 lines.
+- Source SHA-256:
+
+```text
+898d6e77868d14d992a52bad2340472f8953d69c7b0311068cc0e9047d871c16
+```
+
+The tables and constants are those of v20, and no stage was added. The revision adds the concluding section of the manuscript, which names no new computation, and one clarification in the proof of the theorem on balanced triples.
+
 ## Reproducing the stored results
 
 Run the complete checker from the repository root:
@@ -101,6 +113,6 @@ Keep three kinds of statements explicit when extending the repository:
 
 - **Finite verifications:** an exhaustive enumeration or exact comparison that the code has actually performed.
 - **Mathematical inputs:** theorems used to interpret those finite checks, such as the primitive-divisor supply.
-- **Further work:** announced computations that have not yet been run, such as the finite checks for two distinct bases.
+- **Further work:** computations that have not yet been implemented or verified.
 
 For example, the introductory stage factors the differences for the base-three candidate and does not test minimality. Its output points to `base3_minimality.json`, the record of the separate exhaustive computation.

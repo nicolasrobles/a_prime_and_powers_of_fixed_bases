@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Run all verification steps for manuscript v13."""
+"""Run all verification stages recorded in the source manifest."""
 from scripts.verification import main
 
 if __name__ == '__main__':
