@@ -29,7 +29,9 @@
     "introductory_arithmetic": "Candidate nonrepresentability and finite residue classifications.",
     "base3_minimality_verified": true,
     "balanced_sieve": "The set of 626 primes and the upper bound for the density of the surviving residue pairs (v19, Lemma 5.1).",
-    "base3_minimality": "Exhaustive search over all odd integers coprime to 3 between 10 and 118514161 (v19, Theorem 1.5)."
+    "base3_minimality": "Exhaustive search over all odd integers coprime to 3 between 10 and 118514161 (v19, Theorem 1.5).",
+    "common_sums": "The three congruences proving the statement on common sums (v20, Proposition 7.1).",
+    "odd_sum_counts": "The counts printed in the numerical table for two distinct bases (v20, Table 5); no proof depends on them."
   },
   "certificate_note": "The original ap_certificate.json metadata records 2.2874. The verifier checks its entries against the stronger v13 target 2.287407.",
   "revisions": [
@@ -58,6 +60,33 @@
       "added_checks": {
         "balanced_sieve.json": "Lemma 5.1: the 626 primes and the density bound 0.253624.",
         "base3_minimality.json": "Theorem 1.5: every smaller admissible integer is a prime plus two positive powers of 3."
+      }
+    },
+    {
+      "version": "v20",
+      "filename": "prime_and_fixed_base_powers_v20.tex",
+      "sha256": "1ec50e6c79525322824cc2318567350bddf7fea8322647a4407f6fc6ff599381",
+      "bytes": 157071,
+      "lines": 3472,
+      "table_lines": {
+        "tab:G2": [
+          1051,
+          1074
+        ],
+        "tab:G3": [
+          1076,
+          1095
+        ],
+        "tab:k": [
+          1221,
+          1247
+        ]
+      },
+      "tables": "The three numerical tables are those of v19.",
+      "constants": "Unchanged from v19.",
+      "added_checks": {
+        "common_sums.json": "Proposition 7.1: the three congruences for the common sums of two pairs of bases.",
+        "odd_sum_counts.json": "Table 5: counts of odd integers p + q1^j + q2^k up to 10^7 and 10^8 (numerical data)."
       }
     }
   ]

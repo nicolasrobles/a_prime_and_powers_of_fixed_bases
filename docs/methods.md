@@ -283,6 +283,22 @@ The odd primes up to $N$ are found by the sieve of Eratosthenes on the odd integ
 
 Since a representation with a prime and positive exponents is also one with a prime power and nonnegative exponents, $N$ is the least exception in each of the four conventions.
 
+## Common sums for two pairs of bases
+
+For odd primes $q_1\ne q_2$ let $\mathcal A(q_1,q_2)$ be the set of the integers $q_1^j+q_2^k$ with $j,k\ge1$. `scripts/common_sums.py` proves that $18$ is the only common element of $\mathcal A(5,13)$ and $\mathcal A(7,11)$, and that $\mathcal A(17,19)$ and $\mathcal A(599,601)$ are disjoint.
+
+| Modulus $m$ | Left side | Right side | $T$ | Residues, left | Residues, right | Common |
+|---:|---|---|---:|---:|---:|---:|
+| 2,978,325 | $5^j+13^k$, $j\ge2$ | $7^a+11^b$ | 60 | 1800 | 3600 | 0 |
+| 132,665 | $5+13^k$, $k\ge2$ | $7^a+11^b$ | 156 | 12 | 21,561 | 0 |
+| 731,120 | $17^j+19^k$ | $599^a+601^b$ | 36 | 1296 | 324 | 0 |
+
+For each power $g^v$ with $v\ge v_0$ the program checks $g^{v_0+T}\equiv g^{v_0}\pmod m$. Multiplying by powers of $g$ gives $g^{v+T}\equiv g^v$ for all $v\ge v_0$, so the residues of these powers are those with $v_0\le v<v_0+T$. The program forms the sets of residues of the two sides and finds them disjoint. The first two rows exclude $j\ge2$, and $j=1$ with $k\ge2$. The remaining case is $5+13=18$, and $7^a+11^b=18$ only for $a=b=1$.
+
+## Counts for two distinct bases
+
+`scripts/odd_sum_counts.py` counts the odd integers $n\le x$ of the form $p+q_1^j+q_2^k$ with $p$ prime and $j,k\ge1$, for the pairs $(5,13)$, $(7,11)$, $(17,19)$, $(599,601)$ and for $x=10^7$ and $x=10^8$, together with the intersections for the first two and for the last two pairs. For odd $n$ the prime is odd. The odd primes are stored as the bits of one integer, bit $i$ standing for $2i+1$; adding $q_1^j$ and then $q_2^k$ amounts to shifts by $(q_1^j-1)/2$ and $(q_2^k+1)/2$ bits. The program compares the counts with the table of the manuscript. These counts are numerical data, and no proof depends on them.
+
 ## Mathematical references
 
 - Cristian Cobeli, Nicolas Robles, and Alexandru Zaharescu, *A prime and powers of fixed bases*, version 13. The manifest records the source identity, and the table file records the raw table locations.

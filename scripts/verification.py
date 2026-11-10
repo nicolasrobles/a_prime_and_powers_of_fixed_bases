@@ -3,7 +3,8 @@
 The allocation and auxiliary computations of Section 4 are tied to the
 tables extracted from v13, which are unchanged in the later revisions
 recorded in data/source_manifest.json. The stages 'balanced' and 'base3'
-were added for v19 and are implemented in separate modules.
+were added for v19, and the stages 'common' and 'counts' for v20. They are
+implemented in separate modules.
 
 Only Python's standard library is required. All acceptance tests use integers
 or Fraction. Floating-point fields are supplementary displays. The input
@@ -429,7 +430,8 @@ def main(default_stage='all', cases=(2, 3), allow_stage=True):
         description='Exact finite verification for A prime and powers of fixed bases.')
     if allow_stage:
         parser.add_argument('stage', choices=['finite', 'tail', 'intro',
-                                              'balanced', 'base3', 'all'],
+                                              'balanced', 'base3', 'common',
+                                              'counts', 'all'],
                             default=default_stage, nargs='?')
     parser.add_argument('--output-dir', type=Path, default=OUT,
                         help='output directory (default: results/ in this repository)')
@@ -450,6 +452,12 @@ def main(default_stage='all', cases=(2, 3), allow_stage=True):
     if stage in ('base3', 'all'):
         from scripts.base3_minimality import run_checks as base3_checks
         base3_checks(OUT)
+    if stage in ('common', 'all'):
+        from scripts.common_sums import run_checks as common_checks
+        common_checks(OUT)
+    if stage in ('counts', 'all'):
+        from scripts.odd_sum_counts import run_checks as count_checks
+        count_checks(OUT)
     print('SUCCESS', flush=True)
     return 0
 

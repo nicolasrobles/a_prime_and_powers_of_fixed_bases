@@ -39,6 +39,21 @@ Two stages were added for statements that first appear after v13:
 
 The revision is recorded under `revisions` in `data/source_manifest.json`, with the line ranges of the three tables in the v19 source. `scripts/check_source_tables.py` accepts either recorded source.
 
+## The v20 revision
+
+- Source filename: `prime_and_fixed_base_powers_v20.tex`.
+- Source size: 157,071 bytes, 3,472 lines.
+- Source SHA-256:
+
+```text
+1ec50e6c79525322824cc2318567350bddf7fea8322647a4407f6fc6ff599381
+```
+
+The tables and constants are those of v19. Two stages were added for the section on two distinct bases:
+
+- `common` (Proposition 7.1), implemented in `scripts/common_sums.py`, with the result file `common_sums.json`;
+- `counts` (Table 5), implemented in `scripts/odd_sum_counts.py`, with the result file `odd_sum_counts.json`. These counts are numerical data.
+
 ## Reproducing the stored results
 
 Run the complete checker from the repository root:

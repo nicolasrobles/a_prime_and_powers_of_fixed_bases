@@ -2,7 +2,7 @@
 
 Computational files for the manuscript by **Cristian Cobeli, Nicolas Robles, and Alexandru Zaharescu**.
 
-This repository reproduces the finite computations used in the manuscript. It includes the rational allocation witnesses, exact verification programs, the three numerical tables, generated result files, and figures. The allocation data were extracted from version 13 and are unchanged in version 19, for which two further checks were added: the density bound for the balanced-triple sieve and the least base-three exception.
+This repository reproduces the finite computations used in the manuscript. It includes the rational allocation witnesses, exact verification programs, the three numerical tables, generated result files, and figures. The allocation data were extracted from version 13 and are unchanged in the later versions. Further checks were added for version 19 (the density bound for the balanced-triple sieve and the least base-three exception) and for version 20 (the common sums of two pairs of bases and the counts of the numerical table).
 
 ## Run the verification
 
@@ -16,7 +16,7 @@ cd a_prime_and_powers_of_fixed_bases
 python3 verify_all.py
 ```
 
-The command verifies both finite allocations, all auxiliary order calculations, the resulting products and constants, the introductory arithmetic, the balanced-triple density bound, and the least base-three exception. It takes under a minute and uses about 100 MB of memory. It writes the complete results to `results/`. A failed check stops with an error and a nonzero exit status. Run Python normally, without `-O`, because the programs use assertions.
+The command verifies both finite allocations, all auxiliary order calculations, the resulting products and constants, the introductory arithmetic, the balanced-triple density bound, the least base-three exception, the congruences for common sums, and the counts for two distinct bases. It takes under a minute and uses about 100 MB of memory. It writes the complete results to `results/`. A failed check stops with an error and a nonzero exit status. Run Python normally, without `-O`, because the programs use assertions.
 
 To reproduce the results in a separate directory, run:
 
@@ -24,7 +24,7 @@ To reproduce the results in a separate directory, run:
 python3 verify_all.py --output-dir _verification_tmp
 ```
 
-A complete run writes seven canonical JSON files: `allocation_finite_exact.json`, `allocation_tail_exact.json`, `coefficient_checks.json`, `full_recursion_comparison.json`, `intro_checks.json`, `balanced_sieve.json`, and `base3_minimality.json`. Corresponding JSON values in the fresh directory and `results/` should agree.
+A complete run writes nine canonical JSON files: `allocation_finite_exact.json`, `allocation_tail_exact.json`, `coefficient_checks.json`, `full_recursion_comparison.json`, `intro_checks.json`, `balanced_sieve.json`, `base3_minimality.json`, `common_sums.json`, and `odd_sum_counts.json`. Corresponding JSON values in the fresh directory and `results/` should agree.
 
 The programs named in the manuscript can also be run separately:
 
@@ -35,9 +35,11 @@ python3 verify_binary_tail.py
 python3 verify_ap_tail.py
 python3 verify_balanced.py
 python3 verify_base3_minimality.py
+python3 verify_common_sums.py
+python3 count_odd_sums.py
 ```
 
-The cover programs check the finite rational allocations. The tail programs check the auxiliary prime counts, covering counts, products, and final constants. `verify_balanced.py` determines the 626 primes of the balanced-triple sieve and proves the density bound of Lemma 5.1. `verify_base3_minimality.py` proves both assertions of Theorem 1.5. The additional command
+The cover programs check the finite rational allocations. The tail programs check the auxiliary prime counts, covering counts, products, and final constants. `verify_balanced.py` determines the 626 primes of the balanced-triple sieve and proves the density bound of Lemma 5.1. `verify_base3_minimality.py` proves both assertions of Theorem 1.5. `verify_common_sums.py` checks the three congruences of Proposition 7.1, and `count_odd_sums.py` recomputes the counts of Table 5. The additional command
 
 ```sh
 python3 verify_intro.py
@@ -85,6 +87,8 @@ and its exact value is $0.25362356684502987\ldots$
 
 For base three, $N=118\,514\,161$ is not a prime power plus two powers of 3 with nonnegative exponents, and each of the 39,504,717 odd integers $n$ coprime to 3 with $10<n<N$ is a prime plus two positive powers of 3.
 
+For two distinct bases, the integer 18 is the only one of the form $5^j+13^k$ and of the form $7^a+11^b$ with positive exponents, and no integer is of the form $17^j+19^k$ and of the form $599^a+601^b$. The counts of odd integers $p+q_1^j+q_2^k$ up to $10^7$ and $10^8$ are in `results/odd_sum_counts.json`; they are numerical data and no proof depends on them.
+
 ## Files
 
 | Path | Contents |
@@ -96,12 +100,14 @@ For base three, $N=118\,514\,161$ is not a prime power plus two powers of 3 with
 | `scripts/verification.py` | Shared exact verification routines used by the root entrypoints. |
 | `scripts/balanced_sieve.py` | The balanced-triple sieve: the set of 626 primes and the density bound. |
 | `scripts/base3_minimality.py` | The base-three candidate and the exhaustive search below it. |
+| `scripts/common_sums.py` | The congruences for the common sums of two pairs of bases. |
+| `scripts/odd_sum_counts.py` | Counts of odd integers that are a prime plus powers of two distinct bases. |
 | `results/` | Full exact results, including order witnesses, capacity slacks, minima, prime-factor counts, and coefficient bounds. |
 | `tables/` | CSV and LaTeX versions of the numerical tables and summaries. |
 | `plots/` | PNG and SVG figures, with captions explaining their content. |
 | `notebooks/reproduce_v13.ipynb` | A notebook that runs the verification and presents the results. |
 | `docs/methods.md` | Definitions, arithmetic, and mathematical inputs used by the programs. |
-| `docs/versioning.md` | How the files are tied to v13 and v19, and how to record later revisions. |
+| `docs/versioning.md` | How the files are tied to v13 and to the later recorded revisions. |
 
 The field `certified_gamma` in the original ternary witness reads `"2.2874"`. The verifier checks the stronger v13 target **2.287407** against the actual entries. The supplied witness is preserved unchanged.
 
@@ -132,9 +138,7 @@ The GitHub Actions workflow runs the exact verification and regenerates the tabl
 
 ## Scope
 
-The finite allocations and auxiliary calculations correspond to Section 4 of the manuscript, the balanced-triple sieve to Lemma 5.1, and the base-three search to Theorem 1.5. Their use in the asymptotic proofs also requires the mathematical lemmas in the manuscript. The programs verify the finite inequalities and the stated arithmetic inputs.
-
-The analytic results for two distinct bases require their own arguments and computational records, which will be added when that part of the manuscript is complete.
+The finite allocations and auxiliary calculations correspond to Section 4 of the manuscript, the balanced-triple sieve to Lemma 5.1, the base-three search to Theorem 1.5, and the congruences for common sums to Proposition 7.1. Their use in the proofs also requires the mathematical lemmas in the manuscript. The programs verify the finite inequalities and the stated arithmetic inputs.
 
 The manuscript sources are identified by their SHA-256 digests. The tables were extracted from v13:
 
@@ -142,16 +146,10 @@ The manuscript sources are identified by their SHA-256 digests. The tables were 
 af63bc8cb54d4ba3b2e93d6b068d223fce2c822a521640568a353e6a312b7df7
 ```
 
-They were compared again with v19, in which they are unchanged:
-
-```text
-71c0bf24fb9e36e42702a8e6b4916123746b78e08bda795b635fda12207adefe
-```
-
-If one of these sources is available locally, its tables can be compared with the repository inputs:
+They were compared again with the later revisions recorded in `data/source_manifest.json` (v19 and v20), in which they are unchanged. If one of these sources is available locally, its tables can be compared with the repository inputs:
 
 ```sh
-python3 scripts/check_source_tables.py /path/to/prime_and_fixed_base_powers_v19.tex
+python3 scripts/check_source_tables.py /path/to/prime_and_fixed_base_powers_v20.tex
 ```
 
 For a source that is not recorded in `data/source_manifest.json`, add `--rows-only` to compare the table entries only.

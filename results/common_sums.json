@@ -1,0 +1,84 @@
+{
+  "manuscript_statement": "Proposition 7.1",
+  "rows": [
+    {
+      "modulus": 2978325,
+      "period": 60,
+      "terms": [
+        {
+          "base": 5,
+          "least_exponent": 2
+        },
+        {
+          "base": 13,
+          "least_exponent": 1
+        },
+        {
+          "base": 7,
+          "least_exponent": 1
+        },
+        {
+          "base": 11,
+          "least_exponent": 1
+        }
+      ],
+      "left_residues": 1800,
+      "right_residues": 3600,
+      "common_residues": 0
+    },
+    {
+      "modulus": 132665,
+      "period": 156,
+      "terms": [
+        {
+          "base": 5,
+          "least_exponent": null
+        },
+        {
+          "base": 13,
+          "least_exponent": 2
+        },
+        {
+          "base": 7,
+          "least_exponent": 1
+        },
+        {
+          "base": 11,
+          "least_exponent": 1
+        }
+      ],
+      "left_residues": 12,
+      "right_residues": 21561,
+      "common_residues": 0
+    },
+    {
+      "modulus": 731120,
+      "period": 36,
+      "terms": [
+        {
+          "base": 17,
+          "least_exponent": 1
+        },
+        {
+          "base": 19,
+          "least_exponent": 1
+        },
+        {
+          "base": 599,
+          "least_exponent": 1
+        },
+        {
+          "base": 601,
+          "least_exponent": 1
+        }
+      ],
+      "left_residues": 1296,
+      "right_residues": 324,
+      "common_residues": 0
+    }
+  ],
+  "common_elements_5_13_and_7_11": [
+    18
+  ],
+  "common_elements_17_19_and_599_601": []
+}
