@@ -1,0 +1,31 @@
+name: Verify computations
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Check out the repository
+        uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+      - name: Set up Python
+        uses: actions/setup-python@v7
+        with:
+          python-version: '3.13'
+      - name: Verify all finite computations
+        run: python verify_all.py --output-dir _ci_results
+      - name: Compare exact reference results
+        run: diff -r results _ci_results
+      - name: Rebuild tables
+        run: python scripts/make_tables.py
+      - name: Check the committed tables
+        run: git diff --exit-code -- tables

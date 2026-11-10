@@ -1,0 +1,12 @@
+quantity,binary,ternary
+Prescribed prime entries,41,30
+Capacity inequalities,36,25
+Representative allocation entries,301,93
+Reflected allocation entries,601,186
+Surviving exponent-phase pairs,20548,2966
+Claimed coverage constant,2081483/1000000,2287407/1000000
+Minimum normalized coverage,3252320451/1562500000,35740740681/15625000000
+Coverage margin,6527/3125000000,3153/7812500000
+Finite auxiliary order calculations,828,1302
+Finite auxiliary indices,92,93
+All auxiliary indices through 5000,666,667

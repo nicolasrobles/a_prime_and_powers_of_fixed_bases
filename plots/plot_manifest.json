@@ -1,0 +1,23 @@
+{
+  "manuscript_version": "v13",
+  "manuscript_sha256": "af63bc8cb54d4ba3b2e93d6b068d223fce2c822a521640568a353e6a312b7df7",
+  "generator": "scripts/make_plots.py",
+  "figures": {
+    "auxiliary_families": {
+      "formats": [
+        "svg",
+        "png"
+      ],
+      "data": "data/tables_v13.json",
+      "meaning": "Certified counts for the finite prime indices."
+    },
+    "partial_products": {
+      "formats": [
+        "svg",
+        "png"
+      ],
+      "data": "tables/partial_products.csv",
+      "meaning": "Exact rational partial products converted for display."
+    }
+  }
+}

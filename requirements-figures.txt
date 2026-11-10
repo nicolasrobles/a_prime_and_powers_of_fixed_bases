@@ -1,0 +1,2 @@
+# Optional. Exact verification and table generation use only Python's standard library.
+matplotlib>=3.6,<4

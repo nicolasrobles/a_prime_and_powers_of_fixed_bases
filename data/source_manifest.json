@@ -1,0 +1,33 @@
+{
+  "schema_version": 1,
+  "manuscript": {
+    "title": "A prime and powers of fixed bases",
+    "version": "v13",
+    "filename": "prime_and_fixed_base_powers_v13.tex",
+    "sha256": "af63bc8cb54d4ba3b2e93d6b068d223fce2c822a521640568a353e6a312b7df7",
+    "bytes": 84482,
+    "lines": 1934,
+    "required_to_run_verification": false
+  },
+  "inputs": {
+    "binary_cover_1440_full.json": {
+      "bytes": 7341,
+      "sha256": "012f73acc4cf7ab110939a2a1afa3a7182dba86238ceafe975aa360647f87a76"
+    },
+    "ap_certificate.json": {
+      "bytes": 2584,
+      "sha256": "77339551fcb7f1e69e5faafa04e105706c09f44baa9e0cdbe8fca49de3b043ed"
+    },
+    "data/tables_v13.json": {
+      "bytes": 10250,
+      "sha256": "c664831b9f1689854f2cbbdcbac6c645d8c4f559f0745ffb1b0b78654686108e"
+    }
+  },
+  "scope": {
+    "finite_allocation": "Both complete reflected systems and prescribed prime orders.",
+    "auxiliary_primes": "All finite rows, the universal larger-index lower bounds, and exact products.",
+    "introductory_arithmetic": "Candidate nonrepresentability and finite residue classifications.",
+    "base3_minimality_verified": false
+  },
+  "certificate_note": "The original ap_certificate.json metadata records 2.2874. The verifier checks its entries against the stronger v13 target 2.287407."
+}
