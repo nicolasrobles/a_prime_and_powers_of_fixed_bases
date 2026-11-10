@@ -16,7 +16,8 @@ odd integer 2j + 1. Adding the even integer 3^a + 3^b is a shift by
 (3^a + 3^b) / 2 bits. The union of the 136 shifted copies is compared with
 the set of the odd integers coprime to 3 in (10, N].
 
-Only the standard library is used; about 100 MB of memory. Run without -O.
+Only the standard library is used. Memory use depends on the Python version
+and the machine; about 150 MB were measured. Run without -O.
 """
 from math import isqrt
 from pathlib import Path
