@@ -1,10 +1,10 @@
 """Exact verification of the finite computations in the manuscript.
 
-The allocation and auxiliary computations of Section 4 are tied to the
-tables extracted from v13, which are unchanged in the later revisions
-recorded in data/source_manifest.json. The stages 'balanced' and 'base3'
-were added for v19, and the stages 'common' and 'counts' for v20. They are
-implemented in separate modules.
+The allocation and auxiliary computations of Section 4 use the three
+numerical tables of the manuscript, which are stored in data/tables.json.
+The manuscript version to which the statement numbers refer is recorded in
+data/source_manifest.json. The stages 'balanced', 'base3', 'common' and
+'counts' are implemented in separate modules.
 
 Only Python's standard library is required. All acceptance tests use integers
 or Fraction. Floating-point fields are supplementary displays. The input
@@ -26,10 +26,12 @@ PRIMARY = ROOT
 OUT = ROOT / 'results'
 if not __debug__:
     raise SystemExit('Run without -O: this checker uses assertions.')
-TABLES_PATH = ROOT / 'data' / 'tables_v13.json'
+TABLES_PATH = ROOT / 'data' / 'tables.json'
 MANIFEST_PATH = ROOT / 'data' / 'source_manifest.json'
 TABLES = json.loads(TABLES_PATH.read_text(encoding='utf-8'))
 MANIFEST = json.loads(MANIFEST_PATH.read_text(encoding='utf-8'))
+INPUT_NAMES = ('binary_cover_1440_full.json', 'ap_certificate.json',
+               'data/tables.json')
 
 
 
@@ -86,9 +88,8 @@ def validate_cases(cases):
 
 
 def validate_inputs():
-    assert TABLES['schema_version'] == MANIFEST['schema_version'] == 1
-    assert TABLES['manuscript_version'] == MANIFEST['manuscript']['version'] == 'v13'
-    assert TABLES['manuscript_sha256'] == MANIFEST['manuscript']['sha256']
+    assert TABLES['schema_version'] == MANIFEST['schema_version'] == 2
+    assert set(MANIFEST['inputs']) == set(INPUT_NAMES)
     for name, expected in MANIFEST['inputs'].items():
         data = (ROOT / name).read_bytes()
         assert len(data) == expected['bytes'], (name, 'input size')
@@ -100,11 +101,8 @@ def validate_inputs():
 
 def metadata():
     validate_inputs()
-    out = {'source': MANIFEST['manuscript']['filename'],
-           'source_sha256': MANIFEST['manuscript']['sha256'],
-           'source_tables': 'data/tables_v13.json'}
-    for name in ['binary_cover_1440_full.json', 'ap_certificate.json',
-                 'data/tables_v13.json']:
+    out = {'source_tables': 'data/tables.json'}
+    for name in INPUT_NAMES:
         data = (ROOT / name).read_bytes()
         out[name] = {'path': name, 'bytes': len(data),
                      'sha256': hashlib.sha256(data).hexdigest()}

@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Run the tail verification for manuscript v13."""
+"""Run the tail verification for the ternary case."""
 from scripts.verification import main
 
 if __name__ == '__main__':

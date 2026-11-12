@@ -1,6 +1,6 @@
 # Methods used by the verifiers
 
-The programs check the finite claims recorded for versions 13, 19, 20, 21 and 23 of *A prime and powers of fixed bases*. The allocation inputs were extracted from v13 and are unchanged in the later versions. This document explains what is computed and why the checks suffice for those claims. The covering and asymptotic arguments are given in the manuscript.
+The programs check the finite claims of the manuscript *A prime and powers of fixed bases*. The statement numbers refer to the version of the manuscript recorded in `data/source_manifest.json`. This document explains what is computed and why the checks suffice for those claims. The covering and asymptotic arguments are given in the manuscript.
 
 ## Inputs and exact arithmetic
 
@@ -11,7 +11,7 @@ The two allocation witnesses retain the original bytes and filenames:
 | `binary_cover_1440_full.json` | 7,341 | `012f73acc4cf7ab110939a2a1afa3a7182dba86238ceafe975aa360647f87a76` |
 | `ap_certificate.json` | 2,584 | `77339551fcb7f1e69e5faafa04e105706c09f44baa9e0cdbe8fca49de3b043ed` |
 
-Their guard lists are checked against the prescribed primes and residues in `data/tables_v13.json`. The latter file also supplies the claimed orders and auxiliary covering counts from the three manuscript tables. `data/source_manifest.json` identifies the source version and input hashes. The table file records each source label and raw line range.
+Their guard lists are checked against the prescribed primes and residues in `data/tables.json`. The latter file also supplies the claimed orders and auxiliary covering counts from the three manuscript tables, with the label of each table. `data/source_manifest.json` identifies the manuscript source, records the line range of each table in it, and records the input hashes.
 
 Python integers have arbitrary precision. The programs use integer modular exponentiation and `fractions.Fraction` for rational comparisons. Where two rational numbers are compared, the comparison is equivalent to cross-multiplying their positive denominators. Floating-point values are used only for supplementary display and plotting.
 
@@ -301,7 +301,7 @@ For each power $g^v$ with $v\ge v_0$ the program checks $g^{v_0+T}\equiv g^{v_0}
 
 ## Mathematical references
 
-- Cristian Cobeli, Nicolas Robles, and Alexandru Zaharescu, *A prime and powers of fixed bases*, version 13. The manifest records the source identity, and the table file records the raw table locations.
+- Cristian Cobeli, Nicolas Robles, and Alexandru Zaharescu, *A prime and powers of fixed bases*. The manifest records the identity of the source and the locations of the three tables in it.
 - Carl Pomerance, *Cyclotomic primes*, Section 2 of the [author's manuscript](https://math.dartmouth.edu/~carlp/cyclotomicprimesfinal.pdf), for primitive and intrinsic prime factors and the Schinzel result used for general orders $d\equiv4\pmod8$.
 
 Every finite result described above is recomputed by the repository programs. The broader number-theoretic deductions remain mathematical arguments in the accompanying manuscript.

@@ -1,0 +1,141 @@
+{
+  "schema_version": 1,
+  "manuscript": {
+    "title": "A prime and powers of fixed bases",
+    "version": "v13",
+    "filename": "prime_and_fixed_base_powers_v13.tex",
+    "sha256": "af63bc8cb54d4ba3b2e93d6b068d223fce2c822a521640568a353e6a312b7df7",
+    "bytes": 84482,
+    "lines": 1934,
+    "required_to_run_verification": false
+  },
+  "inputs": {
+    "binary_cover_1440_full.json": {
+      "bytes": 7341,
+      "sha256": "012f73acc4cf7ab110939a2a1afa3a7182dba86238ceafe975aa360647f87a76"
+    },
+    "ap_certificate.json": {
+      "bytes": 2584,
+      "sha256": "77339551fcb7f1e69e5faafa04e105706c09f44baa9e0cdbe8fca49de3b043ed"
+    },
+    "data/tables_v13.json": {
+      "bytes": 10250,
+      "sha256": "c664831b9f1689854f2cbbdcbac6c645d8c4f559f0745ffb1b0b78654686108e"
+    }
+  },
+  "scope": {
+    "finite_allocation": "Both complete reflected systems and prescribed prime orders.",
+    "auxiliary_primes": "All finite rows, the universal larger-index lower bounds, and exact products.",
+    "introductory_arithmetic": "Candidate nonrepresentability and finite residue classifications.",
+    "base3_minimality_verified": true,
+    "balanced_sieve": "The set of 626 primes and the upper bound for the density of the surviving residue pairs (v19, Lemma 5.1).",
+    "base3_minimality": "Exhaustive search over all odd integers coprime to 3 between 10 and 118514161 (v19, Theorem 1.5).",
+    "common_sums": "The three congruences proving the statement on common sums (v20, Proposition 7.1).",
+    "odd_sum_counts": "The counts printed in the numerical table for two distinct bases (v20, Table 5); no proof depends on them."
+  },
+  "certificate_note": "The original ap_certificate.json metadata records 2.2874. The verifier checks its entries against the stronger v13 target 2.287407.",
+  "revisions": [
+    {
+      "version": "v19",
+      "filename": "prime_and_fixed_base_powers_v19.tex",
+      "sha256": "71c0bf24fb9e36e42702a8e6b4916123746b78e08bda795b635fda12207adefe",
+      "bytes": 142639,
+      "lines": 3178,
+      "table_lines": {
+        "tab:G2": [
+          1051,
+          1074
+        ],
+        "tab:G3": [
+          1076,
+          1095
+        ],
+        "tab:k": [
+          1221,
+          1247
+        ]
+      },
+      "tables": "The three numerical tables agree with data/tables_v13.json in every entry. The empty cell of the third table is typeset with a single hyphen.",
+      "constants": "The targets Z_2 = 2.081483 and Z_3 = 2.287407 and the bounds for P_i, Z_i P_i and C_i are those of v13, so the two allocation witnesses establish the statements of v19 without change.",
+      "added_checks": {
+        "balanced_sieve.json": "Lemma 5.1: the 626 primes and the density bound 0.253624.",
+        "base3_minimality.json": "Theorem 1.5: every smaller admissible integer is a prime plus two positive powers of 3."
+      }
+    },
+    {
+      "version": "v20",
+      "filename": "prime_and_fixed_base_powers_v20.tex",
+      "sha256": "1ec50e6c79525322824cc2318567350bddf7fea8322647a4407f6fc6ff599381",
+      "bytes": 157071,
+      "lines": 3472,
+      "table_lines": {
+        "tab:G2": [
+          1051,
+          1074
+        ],
+        "tab:G3": [
+          1076,
+          1095
+        ],
+        "tab:k": [
+          1221,
+          1247
+        ]
+      },
+      "tables": "The three numerical tables are those of v19.",
+      "constants": "Unchanged from v19.",
+      "added_checks": {
+        "common_sums.json": "Proposition 7.1: the three congruences for the common sums of two pairs of bases.",
+        "odd_sum_counts.json": "Table 5: counts of odd integers p + q1^j + q2^k up to 10^7 and 10^8 (numerical data)."
+      }
+    },
+    {
+      "version": "v21",
+      "filename": "prime_and_fixed_base_powers_v21.tex",
+      "sha256": "898d6e77868d14d992a52bad2340472f8953d69c7b0311068cc0e9047d871c16",
+      "bytes": 162036,
+      "lines": 3561,
+      "table_lines": {
+        "tab:G2": [
+          1051,
+          1074
+        ],
+        "tab:G3": [
+          1076,
+          1095
+        ],
+        "tab:k": [
+          1221,
+          1247
+        ]
+      },
+      "tables": "The three numerical tables are those of v20.",
+      "constants": "Unchanged from v20.",
+      "added_checks": {}
+    },
+    {
+      "version": "v23",
+      "filename": "prime_and_fixed_base_powers_v23.tex",
+      "sha256": "81ee9d05d72cbd108473946450b44816c02f7db637adcac59bfbf8773ee1a07a",
+      "bytes": 175370,
+      "lines": 3797,
+      "table_lines": {
+        "tab:G2": [
+          1277,
+          1300
+        ],
+        "tab:G3": [
+          1302,
+          1321
+        ],
+        "tab:k": [
+          1447,
+          1473
+        ]
+      },
+      "tables": "The three numerical tables are those of v20.",
+      "constants": "Unchanged from v20.",
+      "added_checks": {}
+    }
+  ]
+}

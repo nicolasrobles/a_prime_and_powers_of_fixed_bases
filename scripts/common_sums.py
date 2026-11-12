@@ -1,4 +1,4 @@
-"""Common sums for two pairs of bases (Proposition 7.1 of v20).
+"""Common sums for two pairs of bases (Proposition 7.1).
 
 For odd primes q1 != q2 let A(q1, q2) be the set of the integers
 q1^j + q2^k with j, k >= 1. The program proves that

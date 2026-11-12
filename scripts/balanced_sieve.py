@@ -1,4 +1,4 @@
-"""The density bound for the balanced-triple sieve (Lemma 5.1 of v19).
+"""The density bound for the balanced-triple sieve (Lemma 5.1).
 
 For a prime q >= 5 write ord_q(2) = 3^alpha * e with 3 not dividing e. The
 set K consists of the primes 5 <= q <= 50000 such that

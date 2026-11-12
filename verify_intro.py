@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Run the intro verification for manuscript v13."""
+"""Run the intro verification."""
 from scripts.verification import main
 
 if __name__ == '__main__':

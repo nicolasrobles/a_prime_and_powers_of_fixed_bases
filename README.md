@@ -2,7 +2,7 @@
 
 Computational files for the manuscript by **Cristian Cobeli, Nicolas Robles, and Alexandru Zaharescu**.
 
-This repository reproduces the finite computations used in the manuscript. It includes the rational allocation witnesses, exact verification programs, the three numerical tables, generated result files, and figures. The allocation data were extracted from version 13 and are unchanged in the later versions. Further checks were added for version 19 (the density bound for the balanced-triple sieve and the least base-three exception) and for version 20 (the common sums of two pairs of bases and the counts of the numerical table).
+This repository reproduces the finite computations used in the manuscript. It includes the rational allocation witnesses, exact verification programs, the three numerical tables, generated result files, and figures. The statement numbers below refer to the version of the manuscript recorded in `data/source_manifest.json`.
 
 ## Run the verification
 
@@ -95,8 +95,8 @@ For two distinct bases, the integer 18 is the only one of the form $5^j+13^k$ an
 |---|---|
 | `binary_cover_1440_full.json` | Original sparse binary allocation witness, with denominator $10^{12}$. |
 | `ap_certificate.json` | Original sparse ternary allocation witness, with denominator $10^{12}$. |
-| `data/tables_v13.json` | The prescribed primes, their orders and residues, and the auxiliary covering counts extracted from v13. |
-| `data/source_manifest.json` | Source identity and input hashes. |
+| `data/tables.json` | The prescribed primes, their orders and residues, and the auxiliary covering counts of the three numerical tables of the manuscript. |
+| `data/source_manifest.json` | The identity of the manuscript source, the line ranges of its three tables, and the input hashes. |
 | `scripts/verification.py` | Shared exact verification routines used by the root entrypoints. |
 | `scripts/balanced_sieve.py` | The balanced-triple sieve: the set of 626 primes and the density bound. |
 | `scripts/base3_minimality.py` | The base-three candidate and the exhaustive search below it. |
@@ -105,11 +105,12 @@ For two distinct bases, the integer 18 is the only one of the form $5^j+13^k$ an
 | `results/` | Full exact results, including order witnesses, capacity slacks, minima, prime-factor counts, and coefficient bounds. |
 | `tables/` | CSV and LaTeX versions of the numerical tables and summaries. |
 | `plots/` | PNG and SVG figures, with captions explaining their content. |
-| `notebooks/reproduce_v13.ipynb` | A notebook that runs the verification and presents the results. |
+| `notebooks/reproduce.ipynb` | A notebook that runs the verification and presents the results. |
 | `docs/methods.md` | Definitions, arithmetic, and mathematical inputs used by the programs. |
-| `docs/versioning.md` | How the files are tied to v13 and to the later recorded revisions. |
+| `docs/versioning.md` | How the files are tied to the manuscript source, and how to record a new version. |
+| `old_material/` | Records of earlier drafts of the manuscript. No program reads this folder, and it can be deleted. |
 
-The field `certified_gamma` in the original ternary witness reads `"2.2874"`. The verifier checks the stronger v13 target **2.287407** against the actual entries. The supplied witness is preserved unchanged.
+The field `certified_gamma` in the original ternary witness reads `"2.2874"`. The verifier checks the stronger target **2.287407** of the manuscript against the actual entries. The supplied witness is preserved unchanged.
 
 ## Tables, figures, and notebook
 
@@ -128,7 +129,7 @@ python3 scripts/make_plots.py
 
 The plots show the certified covering counts through 499 and the partial rational products through 5000. Their captions identify the finite quantities being plotted. The exact result files contain the comparisons used in the proofs.
 
-Open `notebooks/reproduce_v13.ipynb` in Jupyter and run its cells in order. It uses the same Python verification programs and reads their output. Jupyter is needed only to use the notebook interface.
+Open `notebooks/reproduce.ipynb` in Jupyter and run its cells in order. It uses the same Python verification programs and reads their output. Jupyter is needed only to use the notebook interface.
 
 ![Auxiliary covering counts](plots/auxiliary_families.png)
 
@@ -140,18 +141,12 @@ The GitHub Actions workflow runs the exact verification and regenerates the tabl
 
 The finite allocations and auxiliary calculations correspond to Section 4 of the manuscript, the balanced-triple sieve to Lemma 5.1, the base-three search to Theorem 1.5, and the congruences for common sums to Proposition 7.1. Their use in the proofs also requires the mathematical lemmas in the manuscript. The programs verify the finite inequalities and the stated arithmetic inputs.
 
-The manuscript sources are identified by their SHA-256 digests. The tables were extracted from v13:
-
-```text
-af63bc8cb54d4ba3b2e93d6b068d223fce2c822a521640568a353e6a312b7df7
-```
-
-They were compared again with the later revisions recorded in `data/source_manifest.json` (v19, v20, v21 and v23), in which they are unchanged. If one of these sources is available locally, its tables can be compared with the repository inputs:
+The manuscript source is identified by its version, size and SHA-256 digest, which are recorded under `manuscript` in `data/source_manifest.json`. The source is not needed to run the verification. If it is available locally, its three numerical tables can be compared with `data/tables.json`:
 
 ```sh
-python3 scripts/check_source_tables.py /path/to/prime_and_fixed_base_powers_v23.tex
+python3 scripts/check_source_tables.py /path/to/manuscript.tex
 ```
 
-For a source that is not recorded in `data/source_manifest.json`, add `--rows-only` to compare the table entries only.
+The program checks the digest, every table entry, and the recorded line range of each table. For another version of the source, add `--rows-only` to compare the table entries only.
 
-See [the methods](docs/methods.md) for the verification steps and [the versioning notes](docs/versioning.md) for the provenance of the data.
+See [the methods](docs/methods.md) for the verification steps and [the versioning notes](docs/versioning.md) for the identity of the source and the procedure for recording a new version.

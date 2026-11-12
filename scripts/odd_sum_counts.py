@@ -1,4 +1,4 @@
-"""Counts of odd integers p + q1^j + q2^k (Table 5 of v20).
+"""Counts of odd integers p + q1^j + q2^k (Table 5).
 
 For a pair (q1, q2) of odd primes let R(q1, q2) be the set of the integers
 p + q1^j + q2^k with p prime and j, k >= 1. For an odd integer n the prime

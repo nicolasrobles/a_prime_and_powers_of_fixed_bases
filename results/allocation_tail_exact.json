@@ -1,8 +1,6 @@
 {
   "metadata": {
-    "source": "prime_and_fixed_base_powers_v13.tex",
-    "source_sha256": "af63bc8cb54d4ba3b2e93d6b068d223fce2c822a521640568a353e6a312b7df7",
-    "source_tables": "data/tables_v13.json",
+    "source_tables": "data/tables.json",
     "binary_cover_1440_full.json": {
       "path": "binary_cover_1440_full.json",
       "bytes": 7341,
@@ -13,10 +11,10 @@
       "bytes": 2584,
       "sha256": "77339551fcb7f1e69e5faafa04e105706c09f44baa9e0cdbe8fca49de3b043ed"
     },
-    "data/tables_v13.json": {
-      "path": "data/tables_v13.json",
-      "bytes": 10250,
-      "sha256": "c664831b9f1689854f2cbbdcbac6c645d8c4f559f0745ffb1b0b78654686108e"
+    "data/tables.json": {
+      "path": "data/tables.json",
+      "bytes": 9972,
+      "sha256": "7c154f89dcb7996bf4aa7322bbfee63c2f7b025e86d112402c0c6de77cb2b946"
     }
   },
   "method": "Independent generic divisor recurrence plus exact trial factor removal.",

@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Run the finite verification for manuscript v13."""
+"""Run the finite verification for the binary case."""
 from scripts.verification import main
 
 if __name__ == '__main__':

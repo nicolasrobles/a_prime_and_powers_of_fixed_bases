@@ -3,10 +3,10 @@
 
 Usage: python3 scripts/check_source_tables.py /path/to/manuscript.tex
 
-The source is identified by its SHA-256 digest. It must be the v13 source
-from which data/tables_v13.json was extracted, or a later revision recorded
-in data/source_manifest.json. For such a source the program checks every
-table entry and the recorded line range of each table.
+The source is identified by its SHA-256 digest, which must be the one
+recorded under "manuscript" in data/source_manifest.json. For this source
+the program checks every entry of the three tables against data/tables.json
+and the recorded line range of each table.
 
 With --rows-only the program accepts any source and compares the table
 entries only. Use it for a revision that has not been recorded yet.
@@ -40,7 +40,7 @@ def extract_table(tex, label):
         ]
         while fields and not fields[-1]:
             fields.pop()
-        # An empty cell is typeset as "--" in v13 and as "-" from v17 on.
+        # An empty cell is typeset as "-"; early drafts used "--".
         values = [
             None if value in ("-", "--") else int(value.replace("\\,", ""))
             for value in fields
@@ -53,21 +53,6 @@ def extract_table(tex, label):
     ]
 
 
-def recorded_sources(tables, manifest):
-    """Map each recorded digest to (version, line ranges by table label)."""
-    known = {
-        tables["manuscript_sha256"]: (
-            tables["manuscript_version"],
-            {tables[name]["source_label"]: tables[name]["source_lines"]
-             for name in TABLE_NAMES},
-        )
-    }
-    for revision in manifest.get("revisions", []):
-        known[revision["sha256"]] = (
-            revision["version"], revision["table_lines"])
-    return known
-
-
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("source", type=Path)
@@ -78,19 +63,20 @@ def main():
     data = args.source.read_bytes()
     digest = hashlib.sha256(data).hexdigest()
     tables = json.loads(
-        (ROOT / "data/tables_v13.json").read_text(encoding="utf-8"))
+        (ROOT / "data/tables.json").read_text(encoding="utf-8"))
     manifest = json.loads(
         (ROOT / "data/source_manifest.json").read_text(encoding="utf-8"))
-    known = recorded_sources(tables, manifest)
-    if digest in known:
-        version, line_ranges = known[digest]
-        print("Source identified as", version)
+    recorded = manifest["manuscript"]
+    if digest == recorded["sha256"]:
+        assert len(data) == recorded["bytes"], "source size differs"
+        assert data.count(b"\n") == recorded["lines"], "line count differs"
+        line_ranges = recorded["table_lines"]
+        print("Source identified as", recorded["version"])
     else:
-        versions = ", ".join(sorted(v for v, _ in known.values()))
         assert args.rows_only, (
-            "This source is not recorded. Recorded versions: " + versions
+            "This source is not the recorded " + recorded["version"]
             + ". Use --rows-only to compare the table entries only.")
-        version, line_ranges = None, None
+        line_ranges = None
         print("Source not recorded; comparing the table entries only")
     tex = data.decode("utf-8")
     for name in TABLE_NAMES:

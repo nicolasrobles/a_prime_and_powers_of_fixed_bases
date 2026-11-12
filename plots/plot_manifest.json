@@ -1,6 +1,4 @@
 {
-  "manuscript_version": "v13",
-  "manuscript_sha256": "af63bc8cb54d4ba3b2e93d6b068d223fce2c822a521640568a353e6a312b7df7",
   "generator": "scripts/make_plots.py",
   "figures": {
     "auxiliary_families": {
@@ -8,7 +6,7 @@
         "svg",
         "png"
       ],
-      "data": "data/tables_v13.json",
+      "data": "data/tables.json",
       "meaning": "Certified counts for the finite prime indices."
     },
     "partial_products": {

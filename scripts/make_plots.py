@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Regenerate scientific plots from the verified v13 data.
+"""Regenerate the plots from the verified data.
 
 The plotted numbers are computed with exact rational arithmetic, then
 converted to floating point only for rendering. The figures illustrate the
@@ -43,6 +43,8 @@ def style():
         "grid.linewidth": 0.6,
         "axes.axisbelow": True,
         "savefig.facecolor": "white",
+        # A fixed salt makes the identifiers in the SVG files
+        # reproducible. Its value has no other meaning.
         "svg.hashsalt": "prime-and-fixed-base-powers-v13",
     })
 
@@ -145,13 +147,11 @@ def main():
     auxiliary_figure(data)
     product_figure(data, tail, coefficients)
     manifest = {
-        "manuscript_version": data["manuscript_version"],
-        "manuscript_sha256": data["manuscript_sha256"],
         "generator": "scripts/make_plots.py",
         "figures": {
             "auxiliary_families": {
                 "formats": ["svg", "png"],
-                "data": "data/tables_v13.json",
+                "data": "data/tables.json",
                 "meaning": "Certified counts for the finite prime indices.",
             },
             "partial_products": {

@@ -1,4 +1,4 @@
-"""The least base-three exception (Theorem 1.5 and Section 6.2 of v19).
+"""The least base-three exception (Theorem 1.5 and Section 6.2).
 
 Let N = 118514161. The program checks, in integer arithmetic:
 
