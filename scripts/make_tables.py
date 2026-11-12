@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Regenerate the v13 tables using only repository data and exact results.
+"""Regenerate the tables using only repository data and exact results.
 
 Run from any directory with Python 3.9 or later. No optional packages are
 required. The verification results must first be made by verify_all.py.
@@ -26,14 +26,14 @@ def read_json(path):
 
 
 def load_inputs():
-    data = read_json(ROOT / "data" / "tables_v13.json")
+    data = read_json(ROOT / "data" / "tables.json")
     finite = read_json(ROOT / "results" / "allocation_finite_exact.json")
     tail = read_json(ROOT / "results" / "allocation_tail_exact.json")
     coefficients = read_json(ROOT / "results" / "coefficient_checks.json")
     for result in (finite, tail):
         for name in [
             "binary_cover_1440_full.json", "ap_certificate.json",
-            "data/tables_v13.json",
+            "data/tables.json",
         ]:
             digest = hashlib.sha256((ROOT / name).read_bytes()).hexdigest()
             if digest != result["metadata"][name]["sha256"]:
@@ -232,7 +232,7 @@ def auxiliary_table(data):
     write_csv("auxiliary_families.csv", ["r", "k_2", "k_3"], rows)
     write_longtable(
         "auxiliary_families.tex",
-        "Certified auxiliary covering counts in v13 for primes "
+        "Certified auxiliary covering counts for primes "
         + r"$r\le499$. The binary indices start at $r=7$.",
         [r"$r$", r"$k_{2,r}$", r"$k_{3,r}$"],
         [[str(row["r"]), "--" if row["k_2"] == "" else str(row["k_2"]),
@@ -333,8 +333,8 @@ def constants_table(data, tail, coefficients):
     write_longtable(
         "constants.tex",
         "Open rational enclosures for the exact products and coefficients. "
-        "The last column gives the strict bound printed in v13.",
-        ["Quantity", "Lower endpoint", "Upper endpoint", "v13 bound"],
+        "The last column gives the strict bound stated in the manuscript.",
+        ["Quantity", "Lower endpoint", "Upper endpoint", "Stated bound"],
         formatted,
         "lrrr",
     )

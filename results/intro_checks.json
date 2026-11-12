@@ -5512,7 +5512,7 @@
       ]
     }
   ],
-  "base3_minimality_checked": false,
+  "base3_minimality_record": "base3_minimality.json",
   "599_601_periods_mod600": [
     2,
     1

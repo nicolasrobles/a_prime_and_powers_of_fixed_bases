@@ -1,12 +1,26 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "manuscript": {
     "title": "A prime and powers of fixed bases",
-    "version": "v13",
-    "filename": "prime_and_fixed_base_powers_v13.tex",
-    "sha256": "af63bc8cb54d4ba3b2e93d6b068d223fce2c822a521640568a353e6a312b7df7",
-    "bytes": 84482,
-    "lines": 1934,
+    "version": "v25",
+    "filename": "prime_and_fixed_base_powers_v25.tex",
+    "sha256": "f78baab46ec07643bee4e6e7346ea9932505fbc892cb9c19b3892ed7e1722dd6",
+    "bytes": 176482,
+    "lines": 3818,
+    "table_lines": {
+      "tab:G2": [
+        1298,
+        1321
+      ],
+      "tab:G3": [
+        1323,
+        1342
+      ],
+      "tab:k": [
+        1468,
+        1494
+      ]
+    },
     "required_to_run_verification": false
   },
   "inputs": {
@@ -18,16 +32,20 @@
       "bytes": 2584,
       "sha256": "77339551fcb7f1e69e5faafa04e105706c09f44baa9e0cdbe8fca49de3b043ed"
     },
-    "data/tables_v13.json": {
-      "bytes": 10250,
-      "sha256": "c664831b9f1689854f2cbbdcbac6c645d8c4f559f0745ffb1b0b78654686108e"
+    "data/tables.json": {
+      "bytes": 9972,
+      "sha256": "7c154f89dcb7996bf4aa7322bbfee63c2f7b025e86d112402c0c6de77cb2b946"
     }
   },
   "scope": {
     "finite_allocation": "Both complete reflected systems and prescribed prime orders.",
     "auxiliary_primes": "All finite rows, the universal larger-index lower bounds, and exact products.",
     "introductory_arithmetic": "Candidate nonrepresentability and finite residue classifications.",
-    "base3_minimality_verified": false
+    "base3_minimality_verified": true,
+    "balanced_sieve": "The set of 626 primes and the upper bound for the density of the surviving residue pairs (Lemma 5.1).",
+    "base3_minimality": "Exhaustive search over all odd integers coprime to 3 between 10 and 118514161 (Theorem 1.5).",
+    "common_sums": "The three congruences proving the statement on common sums (Proposition 7.1).",
+    "odd_sum_counts": "The counts printed in the numerical table for two distinct bases (Table 5); no proof depends on them."
   },
-  "certificate_note": "The original ap_certificate.json metadata records 2.2874. The verifier checks its entries against the stronger v13 target 2.287407."
+  "certificate_note": "The original ap_certificate.json metadata records 2.2874. The verifier checks its entries against the stronger target 2.287407 of the manuscript."
 }

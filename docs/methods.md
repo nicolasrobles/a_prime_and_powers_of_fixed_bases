@@ -1,6 +1,6 @@
 # Methods used by the verifiers
 
-The programs check finite claims in version 13 of *A prime and powers of fixed bases*. This document explains what is computed and why the checks suffice for those claims. The covering and asymptotic arguments are given in the manuscript.
+The programs check the finite claims of the manuscript *A prime and powers of fixed bases*. The statement numbers refer to the version of the manuscript recorded in `data/source_manifest.json`. This document explains what is computed and why the checks suffice for those claims. The covering and asymptotic arguments are given in the manuscript.
 
 ## Inputs and exact arithmetic
 
@@ -11,7 +11,7 @@ The two allocation witnesses retain the original bytes and filenames:
 | `binary_cover_1440_full.json` | 7,341 | `012f73acc4cf7ab110939a2a1afa3a7182dba86238ceafe975aa360647f87a76` |
 | `ap_certificate.json` | 2,584 | `77339551fcb7f1e69e5faafa04e105706c09f44baa9e0cdbe8fca49de3b043ed` |
 
-Their guard lists are checked against the prescribed primes and residues in `data/tables_v13.json`. The latter file also supplies the claimed orders and auxiliary covering counts from the three manuscript tables. `data/source_manifest.json` identifies the source version and input hashes. The table file records each source label and raw line range.
+Their guard lists are checked against the prescribed primes and residues in `data/tables.json`. The latter file also supplies the claimed orders and auxiliary covering counts from the three manuscript tables, with the label of each table. `data/source_manifest.json` identifies the manuscript source, records the line range of each table in it, and records the input hashes.
 
 Python integers have arbitrary precision. The programs use integer modular exponentiation and `fractions.Fraction` for rational comparisons. Where two rational numbers are compared, the comparison is equivalent to cross-multiplying their positive denominators. Floating-point values are used only for supplementary display and plotting.
 
@@ -240,7 +240,7 @@ The decimal intervals in the result files are certified by rational comparison. 
 
 ## Introductory arithmetic
 
-For $N=118\,514\,161$, one has $3^{16}<N<3^{17}$. It is enough to consider $0\le a\le b\le16$, giving 153 unordered pairs. The program completely factors every $N-3^a-3^b$, checks that the product of the factors reconstructs the difference, and proves each recorded prime factor prime by trial division. Every difference has at least two distinct prime factors, so none is a prime power. The program checks this candidate, not the minimality assertion.
+For $N=118\,514\,161$, one has $3^{16}<N<3^{17}$. It is enough to consider $0\le a\le b\le16$, giving 153 unordered pairs. The program completely factors every $N-3^a-3^b$, checks that the product of the factors reconstructs the difference, and proves each recorded prime factor prime by trial division. Every difference has at least two distinct prime factors, so none is a prime power. This stage checks the candidate. Minimality is treated in the section on base three below.
 
 Modulo 600, the orders of 599 and 601 are 2 and 1. For odd $b$, the possible prime residues are $b$ and $b-2$. Both fail to be units exactly when $b\equiv5$ or $12\pmod{15}$. There are 40 such odd classes modulo 600. Only $b=5$ allows a prime divisor of 600 as one of the residues, giving the two possibilities 5 and 3. Thus there are 39 empty classes, one sparse class with $J_5=2$, and 260 classes with a coprime residue.
 
@@ -252,9 +252,56 @@ $$
 
 for the pair $(17,19)$. The density consequences require the analytic statements of the manuscript.
 
+## The balanced-triple sieve
+
+For a prime $q\ge5$ write $\operatorname{ord}_q(2)=3^{\alpha_q}e_q$ with $3\nmid e_q$. The set $\mathcal K$ consists of the primes $5\le q\le50000$ such that
+
+- $e_q/(e_q,80)$ is $1$ or a prime $v$ with $7\le v\le317$, and
+- $q$ divides $1+2^{h_1}+2^{h_2}$ for some $h_1,h_2\ge0$ divisible by $3^{\alpha_q}$.
+
+`scripts/balanced_sieve.py` computes each order from the factorization of $q-1$. For each $q$ satisfying the first condition it forms $\zeta=2^h$, where $h$ is divisible by $3^{\alpha_q}$ and congruent to $1$ modulo $e_q$, checks that $\zeta$ has order $e_q$ by listing its $e_q$ powers, and finds all pairs $(i,k)$ modulo $e_q$ with $1+\zeta^i+\zeta^k\equiv0\pmod q$. The second condition holds exactly when there is such a pair. The program finds 870 primes with the first condition and 626 with both, and the largest $\alpha_q$ among the latter is $4$. Hence, for exponents divisible by $81$, divisibility by a prime of $\mathcal K$ depends only on the classes of the exponents modulo $e_q$.
+
+Let $N_0=80\prod_{7\le v\le317}v$ over primes $v$, and let $\varrho$ be the density of the pairs of classes modulo $N_0$ for which $1+2^{h_1}+2^{h_2}$ is divisible neither by $3$ nor by a prime of $\mathcal K$. Group the primes of $\mathcal K$ by $v=e_q/(e_q,80)$. For a pair $(a_0,b_0)$ of classes modulo $80$, let $N_v(a_0,b_0)$ be the number of pairs of classes modulo $v$ not excluded by a prime of the group $v$. Since $80$ and the primes $v$ are pairwise coprime,
+
+$$
+\varrho=\frac1{80^2}\sum_{(a_0,b_0)}\prod_v\frac{N_v(a_0,b_0)}{v^2},
+$$
+
+where the sum is over the pairs that are not both even (the prime $3$) and the product includes $v=1$. The program evaluates the right side twice. The first evaluation uses integers scaled by $10^{12}$ and rounds upwards after each factor; it gives
+
+$$
+\varrho\le\frac{1623190827888387}{6400000000000000}<0.253624.
+$$
+
+The second evaluation is exact, with the common denominator $80^2\prod_v v^2$. It gives $\varrho=0.25362356684502987\ldots$, and the program checks that this does not exceed the rounded bound. It also checks $2\cdot0.253624<0.712214^2$ and $0.712214<5/7$ with rational numbers.
+
+## Minimality in base three
+
+`scripts/base3_minimality.py` repeats the 153 factorizations for $N=118\,514\,161$ and then proves that every odd integer $n$ coprime to $3$ with $10<n<N$ is of the form $p+3^a+3^b$ with $p$ prime and $1\le a\le b\le16$. Exponents above $16$ cannot occur since $3^{17}>N$, and $p$ is odd because $n$ is odd and $3^a+3^b$ is even.
+
+The odd primes up to $N$ are found by the sieve of Eratosthenes on the odd integers and stored as the bits of one integer, bit $j$ standing for $2j+1$. Adding $3^a+3^b$ to every prime is a shift by $(3^a+3^b)/2$ bits. The union of the $136$ shifted copies is compared with the set of the odd integers coprime to $3$ in $(10,N]$. The only one of these integers not in the union is $N$, and the number of those below $N$ is $39\,504\,717$.
+
+Since a representation with a prime and positive exponents is also one with a prime power and nonnegative exponents, $N$ is the least exception in each of the four conventions.
+
+## Common sums for two pairs of bases
+
+For odd primes $q_1\ne q_2$ let $\mathcal A(q_1,q_2)$ be the set of the integers $q_1^j+q_2^k$ with $j,k\ge1$. `scripts/common_sums.py` proves that $18$ is the only common element of $\mathcal A(5,13)$ and $\mathcal A(7,11)$, and that $\mathcal A(17,19)$ and $\mathcal A(599,601)$ are disjoint.
+
+| Modulus $m$ | Left side | Right side | $T$ | Residues, left | Residues, right | Common |
+|---:|---|---|---:|---:|---:|---:|
+| 2,978,325 | $5^j+13^k$, $j\ge2$ | $7^a+11^b$ | 60 | 1800 | 3600 | 0 |
+| 132,665 | $5+13^k$, $k\ge2$ | $7^a+11^b$ | 156 | 12 | 21,561 | 0 |
+| 731,120 | $17^j+19^k$ | $599^a+601^b$ | 36 | 1296 | 324 | 0 |
+
+For each power $g^v$ with $v\ge v_0$ the program checks $g^{v_0+T}\equiv g^{v_0}\pmod m$. Multiplying by powers of $g$ gives $g^{v+T}\equiv g^v$ for all $v\ge v_0$, so the residues of these powers are those with $v_0\le v<v_0+T$. The program forms the sets of residues of the two sides and finds them disjoint. The first two rows exclude $j\ge2$, and $j=1$ with $k\ge2$. The remaining case is $5+13=18$, and $7^a+11^b=18$ only for $a=b=1$.
+
+## Counts for two distinct bases
+
+`scripts/odd_sum_counts.py` counts the odd integers $n\le x$ of the form $p+q_1^j+q_2^k$ with $p$ prime and $j,k\ge1$, for the pairs $(5,13)$, $(7,11)$, $(17,19)$, $(599,601)$ and for $x=10^7$ and $x=10^8$, together with the intersections for the first two and for the last two pairs. For odd $n$ the prime is odd. The odd primes are stored as the bits of one integer, bit $i$ standing for $2i+1$; adding $q_1^j$ and then $q_2^k$ amounts to shifts by $(q_1^j-1)/2$ and $(q_2^k+1)/2$ bits. The program compares the counts with the table of the manuscript. These counts are numerical data, and no proof depends on them.
+
 ## Mathematical references
 
-- Cristian Cobeli, Nicolas Robles, and Alexandru Zaharescu, *A prime and powers of fixed bases*, version 13. The manifest records the source identity, and the table file records the raw table locations.
+- Cristian Cobeli, Nicolas Robles, and Alexandru Zaharescu, *A prime and powers of fixed bases*. The manifest records the identity of the source and the locations of the three tables in it.
 - Carl Pomerance, *Cyclotomic primes*, Section 2 of the [author's manuscript](https://math.dartmouth.edu/~carlp/cyclotomicprimesfinal.pdf), for primitive and intrinsic prime factors and the Schinzel result used for general orders $d\equiv4\pmod8$.
 
 Every finite result described above is recomputed by the repository programs. The broader number-theoretic deductions remain mathematical arguments in the accompanying manuscript.

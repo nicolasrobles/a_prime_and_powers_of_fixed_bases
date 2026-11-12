@@ -1,4 +1,10 @@
-"""Exact verification of the finite computations in manuscript v13.
+"""Exact verification of the finite computations in the manuscript.
+
+The allocation and auxiliary computations of Section 4 use the three
+numerical tables of the manuscript, which are stored in data/tables.json.
+The manuscript version to which the statement numbers refer is recorded in
+data/source_manifest.json. The stages 'balanced', 'base3', 'common' and
+'counts' are implemented in separate modules.
 
 Only Python's standard library is required. All acceptance tests use integers
 or Fraction. Floating-point fields are supplementary displays. The input
@@ -20,10 +26,12 @@ PRIMARY = ROOT
 OUT = ROOT / 'results'
 if not __debug__:
     raise SystemExit('Run without -O: this checker uses assertions.')
-TABLES_PATH = ROOT / 'data' / 'tables_v13.json'
+TABLES_PATH = ROOT / 'data' / 'tables.json'
 MANIFEST_PATH = ROOT / 'data' / 'source_manifest.json'
 TABLES = json.loads(TABLES_PATH.read_text(encoding='utf-8'))
 MANIFEST = json.loads(MANIFEST_PATH.read_text(encoding='utf-8'))
+INPUT_NAMES = ('binary_cover_1440_full.json', 'ap_certificate.json',
+               'data/tables.json')
 
 
 
@@ -80,9 +88,8 @@ def validate_cases(cases):
 
 
 def validate_inputs():
-    assert TABLES['schema_version'] == MANIFEST['schema_version'] == 1
-    assert TABLES['manuscript_version'] == MANIFEST['manuscript']['version'] == 'v13'
-    assert TABLES['manuscript_sha256'] == MANIFEST['manuscript']['sha256']
+    assert TABLES['schema_version'] == MANIFEST['schema_version'] == 2
+    assert set(MANIFEST['inputs']) == set(INPUT_NAMES)
     for name, expected in MANIFEST['inputs'].items():
         data = (ROOT / name).read_bytes()
         assert len(data) == expected['bytes'], (name, 'input size')
@@ -94,11 +101,8 @@ def validate_inputs():
 
 def metadata():
     validate_inputs()
-    out = {'source': MANIFEST['manuscript']['filename'],
-           'source_sha256': MANIFEST['manuscript']['sha256'],
-           'source_tables': 'data/tables_v13.json'}
-    for name in ['binary_cover_1440_full.json', 'ap_certificate.json',
-                 'data/tables_v13.json']:
+    out = {'source_tables': 'data/tables.json'}
+    for name in INPUT_NAMES:
         data = (ROOT / name).read_bytes()
         out[name] = {'path': name, 'bytes': len(data),
                      'sha256': hashlib.sha256(data).hexdigest()}
@@ -421,9 +425,11 @@ def tail_checks(cases=(2, 3)):
 def main(default_stage='all', cases=(2, 3), allow_stage=True):
     global OUT
     parser = argparse.ArgumentParser(
-        description='Exact finite verification for A prime and powers of fixed bases, v13.')
+        description='Exact finite verification for A prime and powers of fixed bases.')
     if allow_stage:
-        parser.add_argument('stage', choices=['finite', 'tail', 'intro', 'all'],
+        parser.add_argument('stage', choices=['finite', 'tail', 'intro',
+                                              'balanced', 'base3', 'common',
+                                              'counts', 'all'],
                             default=default_stage, nargs='?')
     parser.add_argument('--output-dir', type=Path, default=OUT,
                         help='output directory (default: results/ in this repository)')
@@ -438,6 +444,18 @@ def main(default_stage='all', cases=(2, 3), allow_stage=True):
     if stage in ('intro', 'all'):
         from scripts.introductory_checks import run_checks
         run_checks(OUT)
+    if stage in ('balanced', 'all'):
+        from scripts.balanced_sieve import run_checks as balanced_checks
+        balanced_checks(OUT)
+    if stage in ('base3', 'all'):
+        from scripts.base3_minimality import run_checks as base3_checks
+        base3_checks(OUT)
+    if stage in ('common', 'all'):
+        from scripts.common_sums import run_checks as common_checks
+        common_checks(OUT)
+    if stage in ('counts', 'all'):
+        from scripts.odd_sum_counts import run_checks as count_checks
+        count_checks(OUT)
     print('SUCCESS', flush=True)
     return 0
 

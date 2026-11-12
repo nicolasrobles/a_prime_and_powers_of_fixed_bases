@@ -1,0 +1,65 @@
+{
+  "manuscript_statement": "Table 5",
+  "rows": [
+    {
+      "first_pair": [
+        5,
+        13
+      ],
+      "second_pair": [
+        7,
+        11
+      ],
+      "x": 10000000,
+      "odd_integers_up_to_x": 5000000,
+      "in_first": 4954168,
+      "in_second": 4952973,
+      "in_both": 4907845
+    },
+    {
+      "first_pair": [
+        17,
+        19
+      ],
+      "second_pair": [
+        599,
+        601
+      ],
+      "x": 10000000,
+      "odd_integers_up_to_x": 5000000,
+      "in_first": 4675126,
+      "in_second": 2081335,
+      "in_both": 1964132
+    },
+    {
+      "first_pair": [
+        5,
+        13
+      ],
+      "second_pair": [
+        7,
+        11
+      ],
+      "x": 100000000,
+      "odd_integers_up_to_x": 50000000,
+      "in_first": 49707637,
+      "in_second": 49714155,
+      "in_both": 49424567
+    },
+    {
+      "first_pair": [
+        17,
+        19
+      ],
+      "second_pair": [
+        599,
+        601
+      ],
+      "x": 100000000,
+      "odd_integers_up_to_x": 50000000,
+      "in_first": 47887149,
+      "in_second": 19044487,
+      "in_both": 18302829
+    }
+  ]
+}

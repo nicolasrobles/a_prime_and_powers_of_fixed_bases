@@ -1,6 +1,6 @@
 # Figures
 
-These figures illustrate the certified finite data for version 13 of *A prime and powers of fixed bases*. The exact comparisons are performed by the verification scripts. Floating point is used only to draw the figures.
+These figures illustrate the certified finite data for *A prime and powers of fixed bases*. The exact comparisons are performed by the verification scripts. Floating point is used only to draw the figures.
 
 ## Auxiliary covering counts
 
