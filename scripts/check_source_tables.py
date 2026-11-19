@@ -6,10 +6,13 @@ Usage: python3 scripts/check_source_tables.py /path/to/manuscript.tex
 The source is identified by its SHA-256 digest, which must be the one
 recorded under "manuscript" in data/source_manifest.json. For this source
 the program checks every entry of the three tables against data/tables.json
-and the recorded line range of each table.
+and the recorded line range of each table. The tables are found in the
+source by their LaTeX labels, which are recorded in the manifest.
 
 With --rows-only the program accepts any source and compares the table
-entries only. Use it for a revision that has not been recorded yet.
+entries only. Use it for a revision that has not been recorded yet. If the
+tables of that revision have other labels, give them with --labels, in the
+order binary guards, ternary guards, auxiliary families.
 
 The manuscript is not needed by the verification programs.
 """
@@ -26,7 +29,9 @@ if not __debug__:
 
 
 def extract_table(tex, label):
-    end = tex.index("\\label{" + label + "}")
+    marker = "\\label{" + label + "}"
+    assert marker in tex, "no table with the label " + label
+    end = tex.index(marker)
     start = tex.rfind("\\begin{table}", 0, end)
     final = tex.index("\\end{table}", end) + len("\\end{table}")
     assert start >= 0
@@ -59,6 +64,9 @@ def main():
     parser.add_argument(
         "--rows-only", action="store_true",
         help="compare the table entries of a source that is not recorded")
+    parser.add_argument(
+        "--labels", nargs=3, metavar="LABEL",
+        help="labels of the three tables in a source that is not recorded")
     args = parser.parse_args()
     data = args.source.read_bytes()
     digest = hashlib.sha256(data).hexdigest()
@@ -70,22 +78,23 @@ def main():
     if digest == recorded["sha256"]:
         assert len(data) == recorded["bytes"], "source size differs"
         assert data.count(b"\n") == recorded["lines"], "line count differs"
-        line_ranges = recorded["table_lines"]
+        assert args.labels is None, "--labels is for unrecorded sources"
+        check_lines = True
         print("Source identified as", recorded["version"])
     else:
         assert args.rows_only, (
             "This source is not the recorded " + recorded["version"]
             + ". Use --rows-only to compare the table entries only.")
-        line_ranges = None
+        check_lines = False
         print("Source not recorded; comparing the table entries only")
     tex = data.decode("utf-8")
-    for name in TABLE_NAMES:
-        expected = tables[name]
-        label = expected["source_label"]
+    labels = args.labels or [
+        recorded["tables"][name]["label"] for name in TABLE_NAMES]
+    for name, label in zip(TABLE_NAMES, labels):
         rows, line_range = extract_table(tex, label)
-        assert rows == expected["rows"], (name, "table rows differ")
-        if line_ranges is not None:
-            assert line_range == line_ranges[label], (
+        assert rows == tables[name]["rows"], (name, "table rows differ")
+        if check_lines:
+            assert line_range == recorded["tables"][name]["lines"], (
                 name, "line range differs")
         print(label, len(rows), "rows agree")
     print("SUCCESS")

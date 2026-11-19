@@ -6,7 +6,7 @@ The statement numbers used in this repository refer to one version of the manusc
 
 - its version label and filename,
 - its size in bytes, its number of lines, and its SHA-256 digest,
-- the line ranges of its three numerical tables, by their labels `tab:G2`, `tab:G3` and `tab:k`.
+- for each of its three numerical tables, the LaTeX label and the line range of the table in the source.
 
 The manuscript is not distributed here, and no verification program reads it. `scripts/check_source_tables.py` compares a local copy of the source with these records and with `data/tables.json`.
 
@@ -49,8 +49,10 @@ The optional Matplotlib dependency is listed in `requirements-figures.txt`. The 
    python3 scripts/check_source_tables.py --rows-only /path/to/new_source.tex
    ```
 
+   If the tables of the new source have other LaTeX labels than the recorded ones, add `--labels` with the three labels, in the order binary guards, ternary guards, auxiliary families.
+
 2. Compare the constants in `parameters` of `data/tables.json` and the statement numbers listed above with the new source.
-3. If the tables, the constants and the statement numbers are unchanged, replace the entry `manuscript` of `data/source_manifest.json` by the version label, filename, size, number of lines, digest and table line ranges of the new source. No other file changes. Then
+3. If the tables, the constants and the statement numbers are unchanged, replace the entry `manuscript` of `data/source_manifest.json` by the version label, filename, size, number of lines, digest, table labels and table line ranges of the new source. No other file changes. Then
 
    ```sh
    python3 scripts/check_source_tables.py /path/to/new_source.tex

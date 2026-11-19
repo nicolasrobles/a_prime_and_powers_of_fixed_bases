@@ -1,7 +1,6 @@
 {
   "schema_version": 2,
   "binary_guards": {
-    "source_label": "tab:G2",
     "source_table_number": 1,
     "columns": [
       "q",
@@ -217,7 +216,6 @@
     ]
   },
   "ternary_guards": {
-    "source_label": "tab:G3",
     "source_table_number": 2,
     "columns": [
       "q",
@@ -378,7 +376,6 @@
     ]
   },
   "auxiliary_families": {
-    "source_label": "tab:k",
     "source_table_number": 3,
     "columns": [
       "r",

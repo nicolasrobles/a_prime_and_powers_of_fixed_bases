@@ -2,24 +2,33 @@
   "schema_version": 2,
   "manuscript": {
     "title": "A prime and powers of fixed bases",
-    "version": "v25",
-    "filename": "prime_and_fixed_base_powers_v25.tex",
-    "sha256": "f78baab46ec07643bee4e6e7346ea9932505fbc892cb9c19b3892ed7e1722dd6",
-    "bytes": 176482,
-    "lines": 3818,
-    "table_lines": {
-      "tab:G2": [
-        1298,
-        1321
-      ],
-      "tab:G3": [
-        1323,
-        1342
-      ],
-      "tab:k": [
-        1468,
-        1494
-      ]
+    "version": "arxiv_v1",
+    "filename": "PrimeAndPowers_CRZ_arxiv_v1.tex",
+    "sha256": "4512df928d2794482adbeb1caba84bc464ccf806f214d4a5e6ac1325f2802b8d",
+    "bytes": 175947,
+    "lines": 3862,
+    "tables": {
+      "binary_guards": {
+        "label": "Table_G2",
+        "lines": [
+          1281,
+          1304
+        ]
+      },
+      "ternary_guards": {
+        "label": "Table_G3",
+        "lines": [
+          1306,
+          1325
+        ]
+      },
+      "auxiliary_families": {
+        "label": "Table_k",
+        "lines": [
+          1455,
+          1481
+        ]
+      }
     },
     "required_to_run_verification": false
   },
@@ -33,8 +42,8 @@
       "sha256": "77339551fcb7f1e69e5faafa04e105706c09f44baa9e0cdbe8fca49de3b043ed"
     },
     "data/tables.json": {
-      "bytes": 9972,
-      "sha256": "7c154f89dcb7996bf4aa7322bbfee63c2f7b025e86d112402c0c6de77cb2b946"
+      "bytes": 9883,
+      "sha256": "6b06b49c6458f7e037f4bfc40c84c6c5423acea94bc11b5b45f8ea5c4a91f2b7"
     }
   },
   "scope": {

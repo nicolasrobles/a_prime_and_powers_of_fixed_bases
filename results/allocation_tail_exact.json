@@ -13,8 +13,8 @@
     },
     "data/tables.json": {
       "path": "data/tables.json",
-      "bytes": 9972,
-      "sha256": "7c154f89dcb7996bf4aa7322bbfee63c2f7b025e86d112402c0c6de77cb2b946"
+      "bytes": 9883,
+      "sha256": "6b06b49c6458f7e037f4bfc40c84c6c5423acea94bc11b5b45f8ea5c4a91f2b7"
     }
   },
   "method": "Independent generic divisor recurrence plus exact trial factor removal.",
