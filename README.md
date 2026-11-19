@@ -96,7 +96,7 @@ For two distinct bases, the integer 18 is the only one of the form $5^j+13^k$ an
 | `binary_cover_1440_full.json` | Original sparse binary allocation witness, with denominator $10^{12}$. |
 | `ap_certificate.json` | Original sparse ternary allocation witness, with denominator $10^{12}$. |
 | `data/tables.json` | The prescribed primes, their orders and residues, and the auxiliary covering counts of the three numerical tables of the manuscript. |
-| `data/source_manifest.json` | The identity of the manuscript source, the line ranges of its three tables, and the input hashes. |
+| `data/source_manifest.json` | The identity of the manuscript source, the labels and line ranges of its three tables, and the input hashes. |
 | `scripts/verification.py` | Shared exact verification routines used by the root entrypoints. |
 | `scripts/balanced_sieve.py` | The balanced-triple sieve: the set of 626 primes and the density bound. |
 | `scripts/base3_minimality.py` | The base-three candidate and the exhaustive search below it. |
@@ -147,6 +147,6 @@ The manuscript source is identified by its version, size and SHA-256 digest, whi
 python3 scripts/check_source_tables.py /path/to/manuscript.tex
 ```
 
-The program checks the digest, every table entry, and the recorded line range of each table. For another version of the source, add `--rows-only` to compare the table entries only.
+The program checks the digest, every table entry, and the recorded line range of each table. For another version of the source, add `--rows-only` to compare the table entries only, and `--labels` if its tables have other LaTeX labels.
 
 See [the methods](docs/methods.md) for the verification steps and [the versioning notes](docs/versioning.md) for the identity of the source and the procedure for recording a new version.
