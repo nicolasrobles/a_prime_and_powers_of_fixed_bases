@@ -4,9 +4,9 @@
     "title": "A prime and powers of fixed bases",
     "version": "arxiv_v1",
     "filename": "PrimeAndPowers_CRZ_arxiv_v1.tex",
-    "sha256": "4512df928d2794482adbeb1caba84bc464ccf806f214d4a5e6ac1325f2802b8d",
-    "bytes": 175947,
-    "lines": 3862,
+    "sha256": "e6df6593ecc6e853d28ad3c3e3f58298c74b6d401ccde55b472fcbd520a010b5",
+    "bytes": 176048,
+    "lines": 3863,
     "tables": {
       "binary_guards": {
         "label": "Table_G2",
